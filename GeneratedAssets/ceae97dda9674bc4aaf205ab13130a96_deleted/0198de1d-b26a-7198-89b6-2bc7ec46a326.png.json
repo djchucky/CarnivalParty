@@ -1,0 +1,20 @@
+{
+    "asset": "ceae97dda9674bc4aaf205ab13130a96",
+    "fileName": "0198de1d-b26a-7198-89b6-2bc7ec46a326.png",
+    "prompt": "small,pancake,cartoonish",
+    "negativePrompt": "blurry",
+    "model": "787326f6-4195-408c-8012-e5e36c22521e",
+    "modelName": "Cartoon 3D",
+    "customSeed": -1,
+    "w3CTraceId": "b85e5324993bcbfeb38903b36c7c0b50",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "D:\\Unity Projects\\Carnival Party\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|d:\\unity projects\\carnival party\\assets\\scripts\\launcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|d:\\unity projects\\carnival party\\assets\\scripts\\target.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\target.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|d:\\unity projects\\carnival party\\assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\uimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|D:\\Unity Projects\\Carnival Party\\assets\\scripts\\launcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\launcher.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|D:\\Unity Projects\\Carnival Party\\assets\\scripts\\simulatedscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\simulatedscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{09B86416-51F5-2B24-9915-9AB9B6146AE2}|Assembly-CSharp.csproj|D:\\Unity Projects\\Carnival Party\\assets\\scripts\\ball.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -23,19 +35,56 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Launcher.cs",
-              "DocumentMoniker": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Launcher.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Launcher.cs",
-              "ToolTip": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Launcher.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Launcher.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAAACgAAAA0AAAAAAAAAA==",
+              "Title": "Target.cs",
+              "DocumentMoniker": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Target.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Target.cs",
+              "ToolTip": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Target.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Target.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T23:02:55.611Z",
+              "WhenOpened": "2025-08-24T18:58:25.891Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "UIManager.cs",
+              "DocumentMoniker": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\UIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\UIManager.cs",
+              "ToolTip": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\UIManager.cs",
+              "RelativeToolTip": "Assets\\Scripts\\UIManager.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAqwCkAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-24T18:40:51.895Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Launcher.cs",
+              "DocumentMoniker": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Launcher.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Launcher.cs",
+              "ToolTip": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Launcher.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Launcher.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-22T23:02:55.611Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "SimulatedScene.cs",
+              "DocumentMoniker": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\SimulatedScene.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SimulatedScene.cs",
+              "ToolTip": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\SimulatedScene.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SimulatedScene.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-23T20:01:50.081Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Ball.cs",
               "DocumentMoniker": "D:\\Unity Projects\\Carnival Party\\Assets\\Scripts\\Ball.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Ball.cs",
@@ -43,8 +92,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Ball.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-22T23:54:03.676Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-22T23:54:03.676Z"
             }
           ]
         }

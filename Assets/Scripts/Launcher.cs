@@ -5,6 +5,7 @@ public class Launcher : MonoBehaviour
 {
     private PlayerInputAction _input;
     private Vector2 _move;
+    private bool _canMove = true;
     [SerializeField] private SimulatedScene _simulatedScene;
 
     [Header("Settings")]
@@ -14,6 +15,10 @@ public class Launcher : MonoBehaviour
     [SerializeField] private float _minValueY = -60f; // angle min Y
     [SerializeField] private float _maxValueY = 60f;  // angle max Y
 
+    [Header("Fire Settings")]
+    private float _nextFire = 0f;
+    [SerializeField] private float _fireRate = 1.5f;
+
     [Header("Prefab settings")]
     [SerializeField] private Ball _ball;
     [SerializeField] private GameObject _ballContainer;
@@ -22,6 +27,17 @@ public class Launcher : MonoBehaviour
     
     private float _rotationX;
     private float _rotationY;
+
+    private void OnEnable()
+    {
+        GameManager.OnGameFinish += DisablePlayer;
+    }
+
+    private void OnDisable()
+    {
+        _input.Player.Fire.performed -= Fire_performed;
+        GameManager.OnGameFinish -= DisablePlayer;
+    }
 
     void Start()
     {
@@ -38,18 +54,27 @@ public class Launcher : MonoBehaviour
     private void Fire_performed(InputAction.CallbackContext obj)
     {
         //Throw ball
-        var ballClone = Instantiate(_ball,transform.position,Quaternion.identity);
-        ballClone.transform.parent = _ballContainer.transform;
-        ballClone.Init(transform.forward * _power);
+        if (!_canMove) return;
+
+        //Check if can Fire
+        if(Time.time > _nextFire)
+        {
+            _nextFire = Time.time + _fireRate;
+            var ballClone = Instantiate(_ball,transform.position,Quaternion.identity);
+            ballClone.transform.parent = _ballContainer.transform;
+            ballClone.Init(transform.forward * _power);
+        }
     }
 
     void Update()
     {
+        if (!_canMove) return;
         Movement();    
     }
 
     private void FixedUpdate()
     {
+        if (!_canMove) return;
         _simulatedScene.SimulateTrajectory(_ball, transform.position, transform.forward * _power);
     }
 
@@ -67,5 +92,10 @@ public class Launcher : MonoBehaviour
 
         // Apply the rotation
         transform.localRotation = Quaternion.Euler(_rotationX, _rotationY, 0f);
+    }
+
+    private void DisablePlayer()
+    {
+        _canMove = false;
     }
 }
