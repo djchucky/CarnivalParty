@@ -1,11 +1,21 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class Launcher : MonoBehaviour
 {
     private PlayerInputAction _input;
+
     private Vector2 _move;
+
     private bool _canMove = true;
+    private bool _isCharging = true;
+
+    private float _rotationX;
+    private float _rotationY;
+
+    public static Action<float,float,float> OnChargeBar;
     [SerializeField] private SimulatedScene _simulatedScene;
 
     [Header("Settings")]
@@ -18,15 +28,15 @@ public class Launcher : MonoBehaviour
     [Header("Fire Settings")]
     private float _nextFire = 0f;
     [SerializeField] private float _fireRate = 1.5f;
+    private const int _minPower = 100;
+    private const int _maxPower = 150;
+    [SerializeField] private float _chargeSpeed = 5f;
+    [SerializeField] [Range(_minPower,_maxPower)] private float _power;
 
     [Header("Prefab settings")]
     [SerializeField] private Ball _ball;
     [SerializeField] private GameObject _ballContainer;
-    [SerializeField] [Range(1,20)] private float _power;
-    [SerializeField] private Vector3 _offset;
-    
-    private float _rotationX;
-    private float _rotationY;
+
 
     private void OnEnable()
     {
@@ -44,7 +54,7 @@ public class Launcher : MonoBehaviour
         _input = new PlayerInputAction();
         _input.Player.Enable();
         _input.Player.Fire.performed += Fire_performed;
-
+        StartCoroutine(ChargeBarRoutine());
         // Store initial rotation
         Vector3 startRot = transform.localEulerAngles;
         _rotationX = startRot.x;
@@ -98,4 +108,36 @@ public class Launcher : MonoBehaviour
     {
         _canMove = false;
     }
+
+    IEnumerator ChargeBarRoutine()
+    {
+        while(_canMove)
+        {
+            while(_isCharging)
+            {
+                _power += (1.0f/_chargeSpeed) * Time.deltaTime;
+                if(_power >= _maxPower)
+                {
+                    _isCharging = false;
+                    break;
+                }
+                OnChargeBar?.Invoke(_power,_minPower,_maxPower);
+                yield return null;
+            }
+
+            while(!_isCharging)
+            {
+                _power -= (1.0f/ _chargeSpeed) * Time.deltaTime;
+                if (_power <= _minPower)
+                {
+                    _power = _minPower;
+                    _isCharging = true;
+                    break;
+                }
+                OnChargeBar?.Invoke(_power, _minPower, _maxPower);
+                yield return null;
+            }
+        }
+    }
+
 }

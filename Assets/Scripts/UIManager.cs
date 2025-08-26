@@ -39,6 +39,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _loseScreen;
     [SerializeField] private GameObject _buttons;
 
+    [Header("ChargeBar")]
+    [SerializeField] private Sprite[] _chargeBarSprites;
+    [SerializeField] private Image _chargeBar;
+
+    private void OnEnable()
+    {
+        Launcher.OnChargeBar += UpdateChargeBar;
+    }
+
+    private void Start()
+    {
+        if(_chargeBar != null)
+        _chargeBar.sprite = _chargeBarSprites[0];
+    }
+
 
     public void UpdateTimer(float timer)
     {
@@ -67,4 +82,18 @@ public class UIManager : MonoBehaviour
         _buttons.SetActive(true);
     }
 
+    public void UpdateChargeBar(float power,float minPower, float maxPower)
+    {
+        // Clamp values
+        power = Mathf.Clamp(power, minPower, maxPower);
+
+        // Normalize values between 0 and 1
+        float normalized = power / maxPower;
+
+        // Calculate next step
+        int index = Mathf.RoundToInt(normalized * (_chargeBarSprites.Length - 1));
+
+        // Update sprite
+        _chargeBar.sprite = _chargeBarSprites[index];
+    }
 }

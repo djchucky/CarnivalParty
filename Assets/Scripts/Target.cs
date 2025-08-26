@@ -12,7 +12,7 @@ public class Target : MonoBehaviour
     {
         if(!collision.gameObject.CompareTag("Untagged"))
         {
-            Debug.Log("Collided with " + collision.collider.name);
+            Debug.Log("Collided with: " + collision.collider.name);
             GetComponent<Renderer>().material.color = Color.red;
             
             if(OnHit != null && !_hasHit)

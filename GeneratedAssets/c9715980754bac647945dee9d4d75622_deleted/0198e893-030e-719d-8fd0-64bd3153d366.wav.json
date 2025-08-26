@@ -1,0 +1,13 @@
+{
+    "asset": "c9715980754bac647945dee9d4d75622",
+    "fileName": "0198e893-030e-719d-8fd0-64bd3153d366.wav",
+    "prompt": "funny bar",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "dc7365ee80ddaca742c65abbcf21e6a7",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}

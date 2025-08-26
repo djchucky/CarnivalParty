@@ -1,0 +1,13 @@
+{
+    "asset": "c9715980754bac647945dee9d4d75622",
+    "fileName": "0198e892-1b8a-7f51-ad2a-1f528dc2b79a.wav",
+    "prompt": "loop background bar ",
+    "negativePrompt": "",
+    "model": "0ee39b33-2893-4e0f-8c46-0e0bdd4eda85",
+    "modelName": "Text to Sound",
+    "customSeed": -1,
+    "w3CTraceId": "18ec711c5cfa16f64e270a7cc7363b91",
+    "duration": 10.0,
+    "autoTrim": false,
+    "hasReference": false
+}
