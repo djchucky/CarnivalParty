@@ -18,13 +18,16 @@ public class SimulatedScene : MonoBehaviour
     // Number of physics steps used when simulating the trajectory
     [SerializeField] private int _maxPhysicsInteraction;
 
-    void Start()
+    private void Awake()
     {
-        // Get the root transform of this GameObject
-        _environment = gameObject.transform.root;
-
         // Create a new simulated scene for physics-only simulation
+       // CreatePhysicsSimulatedScene();
+    }
+
+    private void Start()
+    {
         CreatePhysicsSimulatedScene();
+
     }
 
     private void CreatePhysicsSimulatedScene()
@@ -32,74 +35,64 @@ public class SimulatedScene : MonoBehaviour
         // Create a new scene with its own physics world
         _simulatedScene = SceneManager.CreateScene("SimulatedPhysics", new CreateSceneParameters(LocalPhysicsMode.Physics3D));
         _physicsScene = _simulatedScene.GetPhysicsScene();
+        Debug.Log($"_environment: {_environment.name}, figli trovati: {_environment.childCount}");
 
-        // Clone every object from the environment into the simulated scene
         foreach (Transform child in _environment)
         {
-            GameObject item = child.gameObject;
-            if (item != null && item.transform.childCount > 0)
+            if (child != null)
             {
-                // If object has children, clone it and disable renderers (so it wonít be visible)
-                GameObject parent = Instantiate(item, item.transform.position, Quaternion.identity);
-                foreach (Transform t in parent.transform)
+                GameObject clone = Instantiate(child.gameObject);
+
+                // Disabilita tutti i renderer nella gerarchia
+                foreach (Renderer r in clone.GetComponentsInChildren<Renderer>())
                 {
-                    Renderer r = t.gameObject.GetComponent<Renderer>();
-                    if (r != null)
-                    {
-                        r.enabled = false; // Disable mesh rendering
-                    }
-                    // Move the cloned parent into the simulated scene
-                    SceneManager.MoveGameObjectToScene(parent, _simulatedScene);
-                }
-            }
-            else if (item != null)
-            {
-                // If the object has no children, just clone and disable its renderer
-                GameObject itemClone = Instantiate(item, item.transform.position, item.transform.rotation);
-                Renderer renderer = itemClone.GetComponent<Renderer>();
-                if (renderer != null)
-                {
-                    renderer.enabled = false;
+                    r.enabled = false;
                 }
 
-                // Move the cloned object into the simulated scene
-                SceneManager.MoveGameObjectToScene(itemClone, _simulatedScene);
+                // Sposta l'oggetto nella scena simulata
+                SceneManager.MoveGameObjectToScene(clone, _simulatedScene);
             }
         }
+
     }
 
-    // Simulates the trajectory of a ball and draws it using a line renderer
     public void SimulateTrajectory(Ball ballPrefab, Vector3 pos, Vector3 velocity)
     {
-        // Instantiate the ball inside the main scene
+        // Istanzia la palla nella scena simulata
         var simulatedObject = Instantiate(ballPrefab, pos, Quaternion.identity);
 
-        // Disable rendering so the simulated ball is invisible
-        if (simulatedObject.GetComponent<Renderer>() != null)
+        Rigidbody rb = simulatedObject.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            simulatedObject.GetComponent<Renderer>().enabled = false;
+            rb.linearVelocity = Vector3.zero; // Resetta la velocit√†
+            rb.angularVelocity = Vector3.zero; // Resetta la rotazione
+            rb.useGravity = true; // Abilita la gravit√†
         }
 
-        // Move ball into the simulated physics scene
+        // Disabilita il rendering per rendere invisibile la palla simulata
+        Renderer renderer = simulatedObject.GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.enabled = false;
+        }
+
+        // Sposta la palla nella scena simulata
         SceneManager.MoveGameObjectToScene(simulatedObject.gameObject, _simulatedScene);
 
-        // Initialize ball velocity
-        simulatedObject.Init(velocity);
+        // Inizializza la velocit√† della palla
+        simulatedObject.Init(velocity, pos);
 
-        // Set the number of points for the trajectory line
+        // Imposta il numero di punti per il LineRenderer
         _lineRenderer.positionCount = _maxPhysicsInteraction;
 
-        // Run physics simulation step by step and record positions
+        // Simula la fisica passo dopo passo
         for (int i = 0; i < _maxPhysicsInteraction; i++)
         {
-            // Advance the simulation (scaled for faster progression)
-            _physicsScene.Simulate(Time.fixedDeltaTime * 3f);
-
-            // Save the ballís current position into the line renderer
-            _lineRenderer.SetPosition(i, simulatedObject.transform.position);
+            _physicsScene.Simulate(Time.fixedDeltaTime ); // Avanza la simulazione
+            _lineRenderer.SetPosition(i, simulatedObject.transform.position); // Salva la posizione
         }
 
-        // Destroy the simulated ball after the trajectory has been calculated
+        // Distruggi la palla simulata
         Destroy(simulatedObject.gameObject);
     }
 }

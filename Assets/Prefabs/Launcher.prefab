@@ -52,11 +52,11 @@ MonoBehaviour:
   _maxValueX: 15
   _minValueY: -30
   _maxValueY: 30
-  _fireRate: 1.5
+  _fireRate: 1
+  _chargeSpeed: 0.05
+  _power: 100
   _ball: {fileID: 3341716400330626309, guid: d74157bf41781c6449b4ffd4a39959b4, type: 3}
   _ballContainer: {fileID: 0}
-  _power: 15
-  _offset: {x: 0, y: 0, z: 0}
 --- !u!114 &6161767328110281410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -130,8 +130,8 @@ LineRenderer:
       serializedVersion: 2
       m_Curve:
       - serializedVersion: 3
-        time: 0.01146698
-        value: 0.045454025
+        time: 0.0068807686
+        value: 0.1010122
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -168,7 +168,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0

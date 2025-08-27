@@ -70,9 +70,12 @@ public class Launcher : MonoBehaviour
         if(Time.time > _nextFire)
         {
             _nextFire = Time.time + _fireRate;
-            var ballClone = Instantiate(_ball,transform.position,Quaternion.identity);
-            ballClone.transform.parent = _ballContainer.transform;
-            ballClone.Init(transform.forward * _power);
+            GameObject ballClone = PoolManager.Instance.RequestBall();
+            Vector3 shootPos = transform.position;
+            Vector3 shootDirection = transform.forward * _power;
+            //var ballClone = Instantiate(_ball,transform.position,Quaternion.identity);
+            //ballClone.transform.parent = _ballContainer.transform;
+            ballClone.GetComponent<Ball>().Init(shootDirection,shootPos);
         }
     }
 

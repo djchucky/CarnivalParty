@@ -68,7 +68,7 @@ public class GameManager : MonoBehaviour
     private void FindInitialTargets()
     {
         _arrayTarget = FindObjectsByType<Target>(FindObjectsSortMode.InstanceID);
-        
+            
         foreach (Target t in _arrayTarget)
         {
             _targets.Add(t);

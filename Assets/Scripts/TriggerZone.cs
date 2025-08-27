@@ -4,6 +4,13 @@ public class TriggerZone : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject, 1.5f);
+        if(other.CompareTag("Player"))
+        {
+            other.gameObject.SetActive(false);
+        }
+        else
+        {
+            Destroy(other.gameObject, 1.5f);
+        }
     }
 }
