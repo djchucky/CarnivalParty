@@ -28,8 +28,8 @@ public class Launcher : MonoBehaviour
     [Header("Fire Settings")]
     private float _nextFire = 0f;
     [SerializeField] private float _fireRate = 1.5f;
-    private const int _minPower = 100;
-    private const int _maxPower = 150;
+    private const int _minPower = 0;
+    private const int _maxPower = 100;
     [SerializeField] private float _chargeSpeed = 5f;
     [SerializeField] [Range(_minPower,_maxPower)] private float _power;
 
@@ -40,7 +40,12 @@ public class Launcher : MonoBehaviour
 
     private void OnEnable()
     {
+        _input = new PlayerInputAction();
+        _input.Player.Enable();
+        _input.Player.Fire.performed += Fire_performed;
         GameManager.OnGameFinish += DisablePlayer;
+        _power = 80f;
+        
     }
 
     private void OnDisable()
@@ -51,10 +56,9 @@ public class Launcher : MonoBehaviour
 
     void Start()
     {
-        _input = new PlayerInputAction();
-        _input.Player.Enable();
-        _input.Player.Fire.performed += Fire_performed;
-        StartCoroutine(ChargeBarRoutine());
+        //StartCoroutine(ChargeBarRoutine());
+        OnChargeBar?.Invoke(_power, _minPower, _maxPower);
+
         // Store initial rotation
         Vector3 startRot = transform.localEulerAngles;
         _rotationX = startRot.x;

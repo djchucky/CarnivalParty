@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -30,7 +31,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int _currentHitTarget;
     [SerializeField] private int _totalTargets;
 
-    [SerializeField] private Target[] _arrayTarget;
     [SerializeField] private List<Target> _targets = new List<Target>();
 
     //Subscribe to Target Event 
@@ -57,21 +57,26 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         //Set number of Targets in Scene and Update UI
-        FindInitialTargets();
-        UIManager.Instance.UpdateScore(_currentScore);
-        UIManager.Instance.UpdateTargets(_currentHitTarget, _totalTargets);
+        StartCoroutine(TargetsRoutine());
         
-        if(_timerRoutine == null )
-        _timerRoutine = StartCoroutine(TimerRoutine());
     }
 
     private void FindInitialTargets()
     {
-        _arrayTarget = FindObjectsByType<Target>(FindObjectsSortMode.InstanceID);
-            
-        foreach (Target t in _arrayTarget)
+        //Get Current Active scene
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        //Get all Objects in Scene
+        GameObject[] objectsInScene = currentScene.GetRootGameObjects();
+
+        foreach (GameObject obj in objectsInScene)
         {
-            _targets.Add(t);
+            // Prende tutti i Target nei figli (anche se disattivi)
+            Target[] targetsInChildren = obj.GetComponentsInChildren<Target>(true);
+            foreach (Target t in targetsInChildren)
+            {
+                _targets.Add(t);
+            }
         }
 
         _totalTargets = _targets.Count;
@@ -128,5 +133,16 @@ public class GameManager : MonoBehaviour
             yield return null;
         }  
         _timerRoutine = null;
+    }
+
+    IEnumerator TargetsRoutine()
+    {
+        yield return null;
+        FindInitialTargets();
+        UIManager.Instance.UpdateScore(_currentScore);
+        UIManager.Instance.UpdateTargets(_currentHitTarget, _totalTargets);
+
+        if (_timerRoutine == null)
+            _timerRoutine = StartCoroutine(TimerRoutine());
     }
 }

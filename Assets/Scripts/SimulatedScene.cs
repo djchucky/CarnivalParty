@@ -49,6 +49,14 @@ public class SimulatedScene : MonoBehaviour
                     r.enabled = false;
                 }
 
+                foreach (Target t in clone.GetComponentsInChildren<Target>())
+                {
+                    t.enabled = false;
+                    Collider col = t.GetComponent<Collider>();
+                    if (col != null)
+                        col.enabled = false;
+                }
+
                 // Sposta l'oggetto nella scena simulata
                 SceneManager.MoveGameObjectToScene(clone, _simulatedScene);
             }
@@ -60,6 +68,7 @@ public class SimulatedScene : MonoBehaviour
     {
         // Istanzia la palla nella scena simulata
         var simulatedObject = Instantiate(ballPrefab, pos, Quaternion.identity);
+        
 
         Rigidbody rb = simulatedObject.GetComponent<Rigidbody>();
         if (rb != null)
@@ -88,7 +97,7 @@ public class SimulatedScene : MonoBehaviour
         // Simula la fisica passo dopo passo
         for (int i = 0; i < _maxPhysicsInteraction; i++)
         {
-            _physicsScene.Simulate(Time.fixedDeltaTime ); // Avanza la simulazione
+            _physicsScene.Simulate(Time.fixedDeltaTime * 3f ); // Avanza la simulazione
             _lineRenderer.SetPosition(i, simulatedObject.transform.position); // Salva la posizione
         }
 

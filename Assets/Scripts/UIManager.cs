@@ -27,6 +27,10 @@ public class UIManager : MonoBehaviour
         }
 
         _instance = this;
+
+        if (_chargeBar != null)
+            _chargeBar.sprite = _chargeBarSprites[0];
+
     }
 
     //Variables
@@ -48,12 +52,10 @@ public class UIManager : MonoBehaviour
         Launcher.OnChargeBar += UpdateChargeBar;
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        if(_chargeBar != null)
-        _chargeBar.sprite = _chargeBarSprites[0];
+        Launcher.OnChargeBar -= UpdateChargeBar;
     }
-
 
     public void UpdateTimer(float timer)
     {
@@ -84,6 +86,7 @@ public class UIManager : MonoBehaviour
 
     public void UpdateChargeBar(float power,float minPower, float maxPower)
     {
+        Debug.Log("Event called");
         // Clamp values
         power = Mathf.Clamp(power, minPower, maxPower);
 

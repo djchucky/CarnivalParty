@@ -1,0 +1,20 @@
+{
+    "asset": "2afac28a12e5c6d4aabf5be1f87555ae",
+    "fileName": "0198f28b-10f0-79bc-b3d9-2b174eaa5757.png",
+    "prompt": "generate a menu background from my scene",
+    "negativePrompt": "",
+    "model": "6555098e-bf5d-4fa1-8951-f2627fc68af6",
+    "modelName": "Colorful Digital Icons",
+    "customSeed": -1,
+    "w3CTraceId": "385b8145c22ccb700926dcaf8d8c1f64",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}
